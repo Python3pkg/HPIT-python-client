@@ -68,7 +68,7 @@ class Plugin(MessageSenderMixin):
         Subscribe to messages, each argument is exepcted as a key value pair where
         the key is the message's name and the value is the callback function.
         """
-        for message_name, callback in messages.items():
+        for message_name, callback in list(messages.items()):
             self._post_data('plugin/subscribe', {'message_name' : message_name})
             self.callbacks[message_name] = callback
             
@@ -324,7 +324,7 @@ class Plugin(MessageSenderMixin):
             shared_messages = None
         
         if isinstance(shared_messages,dict):
-            for k,v in shared_messages.items():
+            for k,v in list(shared_messages.items()):
                 if not isinstance(v,str) and not isinstance(v,list):
                     shared_messages = None
                     break

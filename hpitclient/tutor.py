@@ -20,7 +20,7 @@ class Tutor(MessageSenderMixin):
         
         self.blocking_store = {}
 
-        for k, v in kwargs.items():
+        for k, v in list(kwargs.items()):
             setattr(self, k, v)
 
     def send_blocking(self,message_name,payload):

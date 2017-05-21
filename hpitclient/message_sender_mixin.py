@@ -5,6 +5,7 @@ from .exceptions import AuthenticationError, InvalidParametersError, Authorizati
 
 import concurrent.futures
 import time
+import collections
 
 
 class MessageSenderMixin(RequestsMixin):
@@ -148,7 +149,7 @@ class MessageSenderMixin(RequestsMixin):
             self.send_log_entry('No callback registered for message id: ' + message_id)
             return
 
-        if not callable(self.response_callbacks[message_id]):
+        if not isinstance(self.response_callbacks[message_id], collections.Callable):
             self.send_log_entry("Callback registered for transcation id: " + message_id + " is not a callable.")
             return
         
